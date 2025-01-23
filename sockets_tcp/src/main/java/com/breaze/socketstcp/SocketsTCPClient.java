@@ -15,13 +15,13 @@ public class SocketsTCPClient {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Ingrese su nombre");
+        System.out.println("Type your name");
         String name = in.nextLine();
-        System.out.println("Ingrese su apellido");
+        System.out.println("Type your last name");
         String lastName = in.nextLine();
         System.out.println(name+" "+lastName);
         
-        TCPClient client = new TCPClient("", 0);
+        TCPClient client = new TCPClient("192.168.194.17", 9090);
         String res = client.sendMessage(name, lastName);
         
     }

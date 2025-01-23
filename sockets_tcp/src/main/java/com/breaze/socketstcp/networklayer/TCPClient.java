@@ -4,15 +4,10 @@
  */
 package com.breaze.socketstcp.networklayer;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.Socket;
-import javax.net.ssl.SSLServerSocket;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -31,11 +26,11 @@ public class TCPClient {
     }
 
     public void connect() throws IOException {
-        // Establecer conexión con el servidor
+        // Establish connection
         clientSocket = new Socket(serverAddress, serverPort);
-        System.out.println("Conexión establecida con el servidor.");
+        System.out.println("Connection established.");
         
-        // Inicializar los streams
+        // Define input and output
         inputStream = new DataInputStream(clientSocket.getInputStream());
         outputStream = new DataOutputStream(clientSocket.getOutputStream());
     }
@@ -43,21 +38,21 @@ public class TCPClient {
     public String sendMessage(String firstName, String lastName) {
         String response = "error";
         try {
-            // Conectar al servidor
+            // connect to server
             connect();
 
-            // Enviar datos al servidor
-            String message = firstName + "|" + lastName;
-            System.out.println("Enviando: " + message);
+            // Send message to server
+            String message = firstName + ":" + lastName;
+            System.out.println("Sending: " + message);
             outputStream.writeUTF(message);
 
-            // Leer respuesta del servidor
+            // Read server response
             response = inputStream.readUTF();
-            System.out.println("Respuesta del servidor: " + response);
+            System.out.println("Server response " + response);
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         } finally {
-            // Cerrar los recursos
+            // Close connection
             closeConnection();
         }
         return response;
@@ -68,9 +63,9 @@ public class TCPClient {
             if (inputStream != null) inputStream.close();
             if (outputStream != null) outputStream.close();
             if (clientSocket != null) clientSocket.close();
-            System.out.println("Conexión cerrada.");
+            System.out.println("Connection closed.");
         } catch (IOException e) {
-            System.err.println("Error al cerrar la conexión: " + e.getMessage());
+            System.err.println("Error" + e.getMessage());
         }
     }
 }
