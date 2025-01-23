@@ -38,13 +38,15 @@ public class TCPServer {
 
                 // Read client message
                 String clientMessage = inputStream.readUTF();
-                String[] parts = clientMessage.split("|");
+                clientMessage = clientMessage.trim();
+                String[] parts = clientMessage.split(":");
                 System.out.println("client message: " + clientMessage);
                 NamesManager manager = new NamesManager(parts[0], parts[1]);
+                String response = manager.returnInfo();
+                System.out.println("Response: "+response);
                 
-
                 // Send response
-                outputStream.writeUTF(manager.returnInfo());
+                outputStream.writeUTF(response);
 
                 // Close connection
                 clientSocket.close();
