@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.breaze.sockets_tcp;
+package com.breaze.socketstcp;
 
-import com.breaze.sockets_tcp.network_layer.TCPClient;
+import com.breaze.socketstcp.networklayer.TCPClient;
 import java.util.Scanner;
 
 /**
  *
  * @author breaze
  */
-public class Sockets_tcp {
+public class SocketsTCPClient {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -21,11 +21,8 @@ public class Sockets_tcp {
         String lastName = in.nextLine();
         System.out.println(name+" "+lastName);
         
-        TCPClient client = new TCPClient();
-        client.setServerIP("");
-        client.setPort(0);
-        String msg = name+"|"+lastName;
-        String res = client.connect(msg);
+        TCPClient client = new TCPClient("", 0);
+        String res = client.sendMessage(name, lastName);
         
     }
 }

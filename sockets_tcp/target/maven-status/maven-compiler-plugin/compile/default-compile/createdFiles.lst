@@ -1,1 +1,2 @@
-com/breaze/sockets_tcp/Sockets_tcp.class
+com/breaze/socketstcp/SocketsTCPClient.class
+com/breaze/socketstcp/networklayer/TCPClient.class
