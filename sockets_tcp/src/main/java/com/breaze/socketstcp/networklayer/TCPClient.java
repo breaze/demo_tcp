@@ -8,6 +8,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -16,7 +18,7 @@ import java.net.Socket;
 public class TCPClient {
     private String serverAddress;
     private int serverPort;
-    private Socket clientSocket;
+    private SSLSocket clientSocket;
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
 
@@ -27,7 +29,9 @@ public class TCPClient {
 
     public void connect() throws IOException {
         // Establish connection
-        clientSocket = new Socket(serverAddress, serverPort);
+        //clientSocket = new Socket(serverAddress, serverPort);
+        SSLSocketFactory socketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
+        clientSocket = (SSLSocket)socketFactory.createSocket(serverAddress, serverPort);
         System.out.println("Connection established.");
         
         // Define input and output

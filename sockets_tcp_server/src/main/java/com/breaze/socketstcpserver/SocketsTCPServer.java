@@ -5,6 +5,13 @@
 package com.breaze.socketstcpserver;
 
 import com.breaze.socketstcpserver.networklayer.TCPServer;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,6 +20,18 @@ import com.breaze.socketstcpserver.networklayer.TCPServer;
 public class SocketsTCPServer {
 
     public static void main(String[] args) {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream(new File("src/main/java/configuration.properties")));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SocketsTCPServer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SocketsTCPServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String certificateRoute = p.getProperty("SSL_CERTIFICATE_ROUTE");
+        String certificatePassword = p.getProperty("SSL_PASSWORD");
+        System.setProperty("javax.net.ssl.keyStore",certificateRoute);
+        System.setProperty("javax.net.ssl.keyStorePassword",certificatePassword);
         int port = 9090;
 
         TCPServer server = new TCPServer(port);

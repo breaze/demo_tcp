@@ -10,6 +10,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 
 /**
  *
@@ -24,7 +26,9 @@ public class TCPServer {
 
     public void start() {
         try {
-            ServerSocket serverSocket = new ServerSocket(port);
+            //ServerSocket serverSocket = new ServerSocket(port);
+            SSLServerSocketFactory socketFactroy = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
+            SSLServerSocket serverSocket = (SSLServerSocket)socketFactroy.createServerSocket(port);
             System.out.println("Server listening on port: " + port);
 
             while (true) {
