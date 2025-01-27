@@ -22,7 +22,7 @@ public class SocketsTCPServer {
     public static void main(String[] args) {
         Properties p = new Properties();
         try {
-            p.load(new FileInputStream(new File("src/main/java/configuration.properties")));
+            p.load(new FileInputStream(new File("configuration.properties")));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(SocketsTCPServer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -32,8 +32,8 @@ public class SocketsTCPServer {
         String certificatePassword = p.getProperty("SSL_PASSWORD");
         System.setProperty("javax.net.ssl.keyStore",certificateRoute);
         System.setProperty("javax.net.ssl.keyStorePassword",certificatePassword);
+        System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");
         int port = 9090;
-
         TCPServer server = new TCPServer(port);
         server.start();
     }

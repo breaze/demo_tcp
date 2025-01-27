@@ -4,14 +4,27 @@
  */
 package com.breaze.socketstcpserver.networklayer;
 
-import business.NamesManager;
+import com.breaze.socketstcpserver.business.NamesManager;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  *
@@ -27,8 +40,10 @@ public class TCPServer {
     public void start() {
         try {
             //ServerSocket serverSocket = new ServerSocket(port);
+            
             SSLServerSocketFactory socketFactroy = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
             SSLServerSocket serverSocket = (SSLServerSocket)socketFactroy.createServerSocket(port);
+            
             System.out.println("Server listening on port: " + port);
 
             while (true) {

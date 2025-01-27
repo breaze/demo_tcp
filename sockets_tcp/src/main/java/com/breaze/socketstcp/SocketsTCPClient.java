@@ -23,7 +23,7 @@ public class SocketsTCPClient {
     public static void main(String[] args) {
         Properties p = new Properties();
         try {
-            p.load(new FileInputStream(new File("src/main/java/configuration.properties")));
+            p.load(new FileInputStream(new File("configuration.properties")));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(SocketsTCPClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -33,6 +33,7 @@ public class SocketsTCPClient {
         String certificatePassword = p.getProperty("SSL_PASSWORD");
         System.setProperty("javax.net.ssl.keyStore",certificateRoute);
         System.setProperty("javax.net.ssl.keyStorePassword",certificatePassword);
+        System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");
         
         Scanner in = new Scanner(System.in);
         System.out.println("Type your name");

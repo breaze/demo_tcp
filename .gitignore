@@ -1,3 +1,5 @@
 demo_tcp.p12
-sockets_tcp_server/src/main/java/configuration.properties
-sockets_tcp/src/main/java/configuration.properties
+sockets_tcp/configuration.properties
+sockets_tcp_server/configuration.properties
+sockets_tcp/demo_tcp.p12
+sockets_tcp_server/demo_tcp.p12
