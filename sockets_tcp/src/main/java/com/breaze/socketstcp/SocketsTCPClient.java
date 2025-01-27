@@ -34,7 +34,9 @@ public class SocketsTCPClient {
         System.setProperty("javax.net.ssl.keyStore",certificateRoute);
         System.setProperty("javax.net.ssl.keyStorePassword",certificatePassword);
         System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");
-        
+        System.setProperty("javax.net.ssl.trustStore", certificateRoute);
+        System.setProperty("javax.net.ssl.trustStorePassword", certificatePassword);
+        System.setProperty("javax.net.ssl.trustStoreType", "PKCS12");
         Scanner in = new Scanner(System.in);
         System.out.println("Type your name");
         String name = in.nextLine();
